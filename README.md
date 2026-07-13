@@ -20,7 +20,7 @@
 
 ### Dependencies
 
-- **[vite](https://vite.dev/)** with **[React Framework](https://react.dev/)**
+- **[Vite](https://vite.dev/)** with **[React Framework](https://react.dev/)**
 
 ## Instructions for Local Setup
 
@@ -29,6 +29,14 @@
 ### How to run the frontend locally
 
 ## List of Required Environment Variables
+
+## Image Citations
+
+All images used in this project are CC0-licensed, openly licensed, or my original work. The list below organizes them by category, with each including the photo's file name and either a note that it's original work or a link to the source page.
+
+### Icons
+
+### Photos / Images
 
 ## Known Issues or Future Improvements
 
