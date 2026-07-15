@@ -1,56 +1,86 @@
 import { useState } from 'react';
 
-export default function RegisterForm() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+import Message from './ui/Message';
 
-  const [success, setSuccess] = useState('');
-  const [error, setError] = useState('');
+const apiUrl = import.meta.env.VITE_API_URL;
+
+export default function RegisterForm() {
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const [pending, setPending] = useState(false);
+  const [message, setMessage] = useState({ type: '', text: '' });
+
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
+    setPending(true);
+    setMessage({
+      type: '',
+      text: '',
+    });
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL;
-
       const response = await fetch(`${apiUrl}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
+        body: JSON.stringify(user),
       });
 
       if (response.ok) {
-        setSuccess('Signup successful. You can now log in.');
+        setMessage({
+          type: 'success',
+          text: 'Signup successful. You can now log in.',
+        });
       } else {
         const result = await response.json();
-        setError(result.message);
+
+        setMessage({
+          type: 'error',
+          text: result.message,
+        });
       }
     } catch (err) {
-      setError(err.message);
+      setMessage({
+        type: 'error',
+        text: err.message,
+      });
+    } finally {
+      setPending(false);
+      setUser({
+        name: '',
+        email: '',
+        password: '',
+      });
     }
   };
 
   return (
     <div>
+      <h2>Welcome</h2>
+
+      {message && <Message type={message.type} text={message.text} />}
+
       <form onSubmit={handleSubmit}>
         <label htmlFor='name'>
-          {' '}
-          Name
+          Name{' '}
           <input
             type='text'
             name='name'
             id='name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={user.name}
+            onChange={handleChange}
             placeholder='John Smith'
           />
         </label>
@@ -61,8 +91,8 @@ export default function RegisterForm() {
             type='text'
             name='email'
             id='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={user.email}
+            onChange={handleChange}
             placeholder='example@email.com'
           />
         </label>
@@ -73,17 +103,15 @@ export default function RegisterForm() {
             type='password'
             name='password'
             id='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={user.password}
+            onChange={handleChange}
           />
         </label>
 
-        <button type='submit' className='form-btn'>
-          Signup
+        <button type='submit' className='btn' disabled={pending}>
+          {pending ? 'Signing Up...' : 'Sign Up'}
         </button>
       </form>
-      {error && <p>{error}</p>}
-      {success && <p>{success}</p>}
     </div>
   );
 }
