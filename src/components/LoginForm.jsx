@@ -1,46 +1,73 @@
 import { useState } from 'react';
 
-export default function LoginForm({ onSuccess }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+import Message from './ui/Message';
 
-  const [success, setSuccess] = useState('');
-  const [error, setError] = useState('');
+const apiUrl = import.meta.env.VITE_API_URL;
+
+export default function LoginForm({ onSuccess }) {
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [pending, setPending] = useState(false);
+  const [message, setMessage] = useState({ type: '', text: '' });
+
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
+    setPending(true);
+    setMessage({
+      type: '',
+      text: '',
+    });
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL;
-
       const response = await fetch(`${apiUrl}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        body: JSON.stringify(user),
       });
 
       const result = await response.json();
 
       if (response.ok) {
-        setSuccess(result.message);
         onSuccess(result.token);
       } else {
-        setError(result.message);
+        setMessage({
+          type: 'error',
+          text: result.message,
+        });
       }
     } catch (err) {
-      setError(err.message);
+      setMessage({
+        type: 'error',
+        text: err.message,
+      });
+    } finally {
+      setPending(false);
+      setUser({
+        name: '',
+        email: '',
+        password: '',
+      });
     }
   };
 
   return (
     <div>
+      <h2>Welcome Back</h2>
+
+      {message && <Message type={message.type} text={message.text} />}
+
       <form onSubmit={handleSubmit}>
         <label htmlFor='email'>
           Email Address{' '}
@@ -48,8 +75,8 @@ export default function LoginForm({ onSuccess }) {
             type='text'
             name='email'
             id='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={user.email}
+            onChange={handleChange}
             placeholder='example@email.com'
           />
         </label>
@@ -60,17 +87,15 @@ export default function LoginForm({ onSuccess }) {
             type='password'
             name='password'
             id='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={user.password}
+            onChange={handleChange}
           />
         </label>
 
         <button type='submit' className='form-btn'>
-          Log in
+          {pending ? 'Logging in...' : 'Log in'}
         </button>
       </form>
-      {error && <p>{error}</p>}
-      {success && <p>{success}</p>}
     </div>
   );
 }
