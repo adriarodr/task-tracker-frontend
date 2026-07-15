@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function LoginForm() {
+export default function LoginForm({ onSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -30,8 +30,7 @@ export default function LoginForm() {
 
       if (response.ok) {
         setSuccess(result.message);
-
-        localStorage.setItem('token', result.token);
+        onSuccess(result.token);
       } else {
         setError(result.message);
       }

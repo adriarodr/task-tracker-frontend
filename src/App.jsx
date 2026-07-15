@@ -1,19 +1,45 @@
+import { useState } from 'react';
+
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
+import ProtectedLayout from './components/layout/ProtectedLayout';
 
-import TaskList from './components/TaskList';
-
-import LogoutButton from './components/LogoutButton';
+const tokenKey = import.meta.env.VITE_TOKEN_KEY;
 
 function App() {
+  const [token, setToken] = useState(localStorage.getItem(tokenKey));
+
+  const handleLogin = (newToken) => {
+    localStorage.setItem(tokenKey, newToken);
+    setToken(newToken);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem(tokenKey);
+    setToken(null);
+  };
+
+  const handleRejection = () => {
+    localStorage.removeItem(tokenKey);
+    setToken(null);
+  };
+
   return (
     <main>
-      <RegisterForm />
-      <LoginForm />
+      {!token && (
+        <div className='container'>
+          <RegisterForm />
+          <LoginForm onSuccess={handleLogin} />
+        </div>
+      )}
 
-      <TaskList />
-
-      <LogoutButton />
+      {token && (
+        <ProtectedLayout
+          token={token}
+          onLogout={handleLogout}
+          onReject={handleRejection}
+        />
+      )}
     </main>
   );
 }
