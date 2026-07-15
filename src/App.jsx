@@ -14,12 +14,7 @@ function App() {
     setToken(newToken);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem(tokenKey);
-    setToken(null);
-  };
-
-  const handleRejection = () => {
+  const handleReset = () => {
     localStorage.removeItem(tokenKey);
     setToken(null);
   };
@@ -36,8 +31,8 @@ function App() {
       {token && (
         <ProtectedLayout
           token={token}
-          onLogout={handleLogout}
-          onReject={handleRejection}
+          onLogout={handleReset}
+          onReject={handleReset}
         />
       )}
     </main>
