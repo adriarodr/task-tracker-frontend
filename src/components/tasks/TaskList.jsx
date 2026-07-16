@@ -81,25 +81,26 @@ export default function TaskList({ token, onAuthError }) {
     return <p>Loading tasks...</p>;
   }
 
-  if (error) {
-    return <Message type='error' text={error} />;
-  }
-
   return (
-    <section>
-      <h2>All Tasks</h2>
+    <section id='taskList'>
+      <Message type='error' text={error} />
 
-      {/* ability to add a new task */}
-      <button className='btn add-tas' onClick={() => setAddModalOpen(true)}>
-        <img src={plusIcon} alt='Plus Icon' className='icon' /> Add Task
-      </button>
+      <div className='task-actions'>
+        <h2>All Tasks</h2>
+
+        {/* ability to add a new task */}
+        <button className='btn add-task' onClick={() => setAddModalOpen(true)}>
+          <img src={plusIcon} alt='Plus Icon' className='icon' /> Add Task
+        </button>
+      </div>
 
       <FormModal
         isOpen={isAddModalOpen}
         onCancel={() => setAddModalOpen(false)}
         className='form-modal'
       >
-        <p>Add task</p>
+        <h3>Add task</h3>
+
         {isAddModalOpen && <TaskForm onSubmit={handleAddTask} />}
       </FormModal>
 
