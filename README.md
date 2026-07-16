@@ -2,7 +2,7 @@
 
 <!-- short project description -->
 
-This is the frontend for my [Task Tracker API](https://github.com/adriarodr/task-tracker-api) built using React. The frontend allows users to register, log in, and manage their tasks through the browser.
+This is the frontend built using React for a task tracker application that uses the [Task Tracker API](https://github.com/adriarodr/task-tracker-api) I made. The application allows users to register, log in, and manage their tasks through the browser.
 
 ## Main Features
 
@@ -12,7 +12,7 @@ This application features:
 
 - A registration form for users to create an account
 - A login form for users to sign in and manage tasks
-- Users can view, add, edit, and delete their tasks
+- Users can view, add, edit, and delete their tasks through buttons and form modals.
 - Error and loading messages
 - Handles the JWT token from login to allow access to protected views through conditional rendering
 
@@ -30,7 +30,7 @@ This application features:
 
 ### Dependencies
 
-- **[Vite](https://vite.dev/)** with **[React Framework](https://react.dev/)** to build the frontend
+- **[Vite](https://vite.dev/)** with the **[React Framework](https://react.dev/)** to build the frontend
 
 ## Instructions for Local Setup
 
@@ -43,7 +43,7 @@ This application features:
 
 ### How to run the backend locally
 
-Please review the [Task Tracker API](https://github.com/adriarodr/task-tracker-api) page for the prerequisites and detailed instructions for local Setup for the backend.
+Please review the [Task Tracker API](https://github.com/adriarodr/task-tracker-api) page for the prerequisites and detailed instructions for local backend setup.
 
 #### Steps
 
@@ -123,11 +123,9 @@ The frontend requires the following environment variables:
 
 ```ini
 VITE_API_URL=your_api_url
-VITE_TOKEN_KEY=your_name_for_the_key
 ```
 
-- `VITE_API_URL` is the URL that the Task Tracker API is running on
-- `VITE_TOKEN_KEY` is the key value name for storing the JWT token in local storage (This is not the actual JWT token)
+- `VITE_API_URL` is the base URL of the Task Tracker API
 
 These variables are included in `.env.example`, so you can copy that file, rename it to `.env`, and add your own values.
 
@@ -149,8 +147,13 @@ All images used in this project are CC0-licensed, openly licensed, or my origina
 
 ### Known Issues
 
-No known issues at this time.
+- Users are sent to the registration page instead of the login page when alerted to log in again.
+- Users can see the logout button when alerted that their login session expired. (However, users can't click on it.)
 
 ### Future Improvements
 
-- Add a confirmation for when deleting tasks
+- Add confirmation for deleting tasks to prevent accidental deletions
+- Add routing and use useContext to pass states to deeply nested components
+- Add custom hooks, useReducer, and separate components to reduce repetitive code and improve maintainability
+- Add a search bar to allow users to search for specific tasks
+- Add a checkbox next to task titles so users can easily check off tasks

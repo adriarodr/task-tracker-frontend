@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import ProtectedLayout from './components/layout/ProtectedLayout';
 import PublicLayout from './components/layout/PublicLayout';
 
-const tokenKey = import.meta.env.VITE_TOKEN_KEY;
+const tokenKey = 'task-tracker-token';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem(tokenKey));
