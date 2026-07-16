@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { formatDate } from '../../utils/utils';
 
-import Modal from '../ui/Modal';
+import FormModal from '../ui/FormModal';
 import TaskForm from '../tasks/TaskForm';
 
 import deleteIcon from '../../assets/icons/trash.svg';
@@ -16,33 +16,40 @@ export default function TaskCard({ task, onUpdate, onDelete }) {
   };
 
   return (
-    <div>
-      <Modal
+    <>
+      <FormModal
         isOpen={editing}
-        onClose={() => setEditing(false)}
-        id='add-task-modal'
+        onCancel={() => setEditing(false)}
+        className='form-modal'
       >
-        <TaskForm task={task} onSubmit={handleModal} />
-      </Modal>
+        <h3>Add task</h3>
+
+        {editing && <TaskForm task={task} onSubmit={handleModal} />}
+      </FormModal>
 
       {/* task card */}
-      <div className='task-card'>
+      <article className='task-card'>
         <h3>{task.title}</h3>
         {task.description && <p>{task.description}</p>}
-        {task.dueDate && <p>Due at {formatDate(task.dueDate)}</p>}
+        {task.dueDate && (
+          <p>
+            Due at <span className='bold'>{formatDate(task.dueDate)}</span>
+          </p>
+        )}
         <p>{task.isCompleted ? 'Complete' : 'Not Complete'}</p>
 
-        {/* Update a task */}
-        <button className='btn' onClick={() => setEditing(true)}>
-          <img src={editIcon} alt='Pencil Icon' className='icon' />
-        </button>
+        <div className='task-card-btns'>
+          <button className='btn' onClick={() => setEditing(true)}>
+            <img src={editIcon} alt='Pencil Icon' className='icon' />
+          </button>
 
-        <button className='btn' onClick={() => onDelete(task._id)}>
-          <img src={deleteIcon} alt='Trash Icon' className='icon' />
-        </button>
+          <button className='btn' onClick={() => onDelete(task._id)}>
+            <img src={deleteIcon} alt='Trash Icon' className='icon' />
+          </button>
+        </div>
 
         {task.updatedAt && <p>Last updated at {formatDate(task.updatedAt)}</p>}
-      </div>
-    </div>
+      </article>
+    </>
   );
 }

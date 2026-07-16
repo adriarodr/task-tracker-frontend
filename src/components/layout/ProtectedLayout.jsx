@@ -17,7 +17,7 @@ export default function ProtectedLayout({ token, onReject }) {
   };
 
   return (
-    <>
+    <main>
       {!authError && (
         <div className='container'>
           <TaskList token={token} onAuthError={handleAuthError} />
@@ -31,6 +31,6 @@ export default function ProtectedLayout({ token, onReject }) {
           message='Your login session has expired. Please log in again.'
         />
       )}
-    </>
+    </main>
   );
 }
