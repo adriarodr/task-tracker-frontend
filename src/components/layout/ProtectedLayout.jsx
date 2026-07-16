@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 
 import Modal from '../ui/Modal';
-import LogoutButton from '../LogoutButton';
+
 import TaskList from '../tasks/TaskList';
 
-export default function ProtectedLayout({ token, onLogout, onReject }) {
+export default function ProtectedLayout({ token, onReject }) {
   const [authError, setAuthError] = useState(false);
 
   const handleAuthError = useCallback(() => {
@@ -15,8 +15,6 @@ export default function ProtectedLayout({ token, onLogout, onReject }) {
     <>
       {!authError && (
         <div className='container'>
-          <LogoutButton onLogout={onLogout} />
-
           <TaskList token={token} onAuthError={handleAuthError} />
         </div>
       )}
