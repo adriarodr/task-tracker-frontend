@@ -1,63 +1,63 @@
 import { useState } from 'react';
 
-export default function LoginForm({ onSuccess }) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [dueDate, setDueDate] = useState('');
-  const [isCompleted, setIsCompleted] = useState(false);
+export default function TaskForm({ task, onSubmit }) {
+  const initialTask = {
+    title: task?.title ?? '',
+    description: task?.description ?? '',
+    dueDate: task?.dueDate?.slice(0, 10) ?? '',
+    isCompleted: task?.isCompleted ?? false,
+  };
 
-  const [success, setSuccess] = useState('');
-  const [error, setError] = useState('');
+  const [newTask, setNewTask] = useState(initialTask);
+
+  const isSame =
+    newTask.title === initialTask.title &&
+    newTask.description === initialTask.description &&
+    newTask.dueDate === initialTask.dueDate &&
+    newTask.isCompleted === initialTask.isCompleted;
+
+  const handleChange = (e) => {
+    setNewTask({
+      ...newTask,
+      [e.target.name]:
+        e.target.type === 'checkbox' ? e.target.checked : e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
 
-    const apiUrl = import.meta.env.VITE_API_URL;
-    const token = localStorage.getItem('token');
-
-    try {
-      const response = await fetch(`${apiUrl}/api/tasks`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          title,
-          description,
-          dueDate,
-          isCompleted,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setSuccess(result.message);
-        onSuccess(result.task);
-      } else {
-        setError(result.message);
-      }
-    } catch (err) {
-      setError(err.message);
-    }
+    onSubmit(newTask);
+    setNewTask({
+      title: '',
+      description: '',
+      dueDate: '',
+      isCompleted: false,
+    });
   };
 
   return (
     <div>
-      {error && <p>{error}</p>}
-      {success && <p>{success}</p>}
       <form onSubmit={handleSubmit}>
+        <label htmlFor='isCompleted'>
+          Completed{' '}
+          <input
+            type='checkbox'
+            name='isCompleted'
+            id='isCompleted'
+            checked={newTask.isCompleted}
+            onChange={handleChange}
+          />
+        </label>
+
         <label htmlFor='title'>
           title{' '}
           <input
             type='text'
             name='title'
             id='title'
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={newTask.title}
+            onChange={handleChange}
           />
         </label>
 
@@ -66,8 +66,8 @@ export default function LoginForm({ onSuccess }) {
           <textarea
             name='description'
             id='description'
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={newTask.description}
+            onChange={handleChange}
           />
         </label>
 
@@ -77,24 +77,13 @@ export default function LoginForm({ onSuccess }) {
             type='date'
             name='dueDate'
             id='dueDate'
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
+            value={newTask.dueDate}
+            onChange={handleChange}
           />
         </label>
 
-        <label htmlFor='isCompleted'>
-          Completed{' '}
-          <input
-            type='checkbox'
-            name='isCompleted'
-            id='isCompleted'
-            value={isCompleted}
-            onChange={(e) => setIsCompleted(e.target.checked)}
-          />
-        </label>
-
-        <button type='submit' className='form-btn'>
-          Add Task
+        <button type='submit' className='form-btn' disabled={isSame}>
+          {task ? 'Update' : 'Add'} Task
         </button>
       </form>
     </div>
