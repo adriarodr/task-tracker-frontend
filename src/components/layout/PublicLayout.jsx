@@ -1,0 +1,22 @@
+import { useState } from 'react';
+
+import LoginForm from '../LoginForm';
+import RegisterForm from '../RegisterForm';
+
+export default function PublicLayout({ onLogin }) {
+  const [isRegister, setRegister] = useState(true);
+
+  const handleToggle = () => {
+    setRegister((prev) => !prev);
+  };
+
+  return (
+    <main className='public'>
+      <button onClick={handleToggle} className='btn'>
+        {isRegister ? 'Login' : 'Register'}
+      </button>
+
+      {isRegister ? <RegisterForm /> : <LoginForm onSuccess={onLogin} />}
+    </main>
+  );
+}
