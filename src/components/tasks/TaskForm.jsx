@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import Message from '../ui/Message';
+
 export default function TaskForm({ task, onSubmit }) {
   const initialTask = {
     title: task?.title ?? '',
@@ -9,6 +11,7 @@ export default function TaskForm({ task, onSubmit }) {
   };
 
   const [newTask, setNewTask] = useState(initialTask);
+  const [error, setError] = useState('');
 
   const isSame =
     newTask.title === initialTask.title &&
@@ -27,6 +30,11 @@ export default function TaskForm({ task, onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!newTask.title) {
+      setError('Please provide a title');
+      return;
+    }
+
     onSubmit(newTask);
     setNewTask({
       title: '',
@@ -38,6 +46,8 @@ export default function TaskForm({ task, onSubmit }) {
 
   return (
     <div>
+      <Message type='error' text={error} />
+
       <form onSubmit={handleSubmit}>
         <label htmlFor='isCompleted'>
           Completed{' '}
@@ -82,7 +92,7 @@ export default function TaskForm({ task, onSubmit }) {
           />
         </label>
 
-        <button type='submit' className='form-btn' disabled={isSame}>
+        <button type='submit' className='btn' disabled={isSame}>
           {task ? 'Update' : 'Add'} Task
         </button>
       </form>
