@@ -22,7 +22,7 @@ export default function TaskCard({ task, onUpdate, onDelete }) {
         onCancel={() => setEditing(false)}
         className='form-modal'
       >
-        <h3>Update Task</h3>
+        <h3>Edit Task</h3>
 
         {editing && <TaskForm task={task} onSubmit={handleModal} />}
       </FormModal>
@@ -39,12 +39,20 @@ export default function TaskCard({ task, onUpdate, onDelete }) {
         <p>{task.isCompleted ? 'Complete' : 'Not Complete'}</p>
 
         <div className='task-card-btns'>
-          <button className='btn' onClick={() => setEditing(true)}>
-            <img src={editIcon} alt='Pencil Icon' className='icon' />
+          <button
+            className='btn'
+            onClick={() => setEditing(true)}
+            aria-label='Edit Task'
+          >
+            <img src={editIcon} alt='' className='icon' />
           </button>
 
-          <button className='btn' onClick={() => onDelete(task._id)}>
-            <img src={deleteIcon} alt='Trash Icon' className='icon' />
+          <button
+            className='btn'
+            onClick={() => onDelete(task._id)}
+            aria-label='Delete Task'
+          >
+            <img src={deleteIcon} alt='' className='icon' />
           </button>
         </div>
 

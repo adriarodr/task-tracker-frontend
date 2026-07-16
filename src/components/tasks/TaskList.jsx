@@ -90,7 +90,7 @@ export default function TaskList({ token, onAuthError }) {
 
         {/* ability to add a new task */}
         <button className='btn add-task' onClick={() => setAddModalOpen(true)}>
-          <img src={plusIcon} alt='Plus Icon' className='icon' /> Add Task
+          <img src={plusIcon} alt='' className='icon' /> Add Task
         </button>
       </div>
 

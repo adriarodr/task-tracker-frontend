@@ -5,7 +5,7 @@ export default function AlertModal({ isOpen, onClose, message }) {
     <Modal isOpen={isOpen}>
       <p>{message}</p>
       <button onClick={onClose} className='btn'>
-        OK
+        Ok
       </button>
     </Modal>
   );

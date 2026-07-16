@@ -24,10 +24,7 @@ export default function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setPending(true);
-    setMessage({
-      type: '',
-      text: '',
-    });
+    setMessage(null);
 
     try {
       const response = await fetch(`${apiUrl}/api/auth/register`, {
