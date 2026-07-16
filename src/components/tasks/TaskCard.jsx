@@ -22,7 +22,7 @@ export default function TaskCard({ task, onUpdate, onDelete }) {
         onCancel={() => setEditing(false)}
         className='form-modal'
       >
-        <h3>Add task</h3>
+        <h3>Update Task</h3>
 
         {editing && <TaskForm task={task} onSubmit={handleModal} />}
       </FormModal>

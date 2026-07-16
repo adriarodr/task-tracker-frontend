@@ -99,7 +99,7 @@ export default function TaskList({ token, onAuthError }) {
         onCancel={() => setAddModalOpen(false)}
         className='form-modal'
       >
-        <h3>Add task</h3>
+        <h3>Add Task</h3>
 
         {isAddModalOpen && <TaskForm onSubmit={handleAddTask} />}
       </FormModal>
