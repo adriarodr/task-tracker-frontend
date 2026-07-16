@@ -225,6 +225,18 @@ form {
   }
 }
 
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 1.45rem;
+
+  margin: auto;
+  padding: var(--padding-sm);
+  border-radius: var(--border-radius-sm);
+  border: none;
+  font-weight: var(--fw-semi-bold);
+}
+
 footer {
   grid-area: footer;
   background-color: var(--c-neutral-700);

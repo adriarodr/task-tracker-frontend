@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export default function Modal({ isOpen, onClose, children }) {
+export default function Modal({ isOpen, children }) {
   const dialogRef = useRef();
 
   useEffect(() => {
@@ -15,11 +15,7 @@ export default function Modal({ isOpen, onClose, children }) {
 
   return (
     <dialog ref={dialogRef} className='modal'>
-      <button className='cancel-btn' onClick={onClose}>
-        Ok
-      </button>
-
-      <div>{children}</div>
+      {children}
     </dialog>
   );
 }

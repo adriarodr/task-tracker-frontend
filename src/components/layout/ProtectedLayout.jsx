@@ -1,15 +1,20 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
-import Modal from '../ui/Modal';
+import AlertModal from '../ui/AlertModal';
 
 import TaskList from '../tasks/TaskList';
 
 export default function ProtectedLayout({ token, onReject }) {
   const [authError, setAuthError] = useState(false);
 
-  const handleAuthError = useCallback(() => {
+  const handleAuthError = () => {
     setAuthError(true);
-  }, []);
+  };
+
+  const handleOnClose = () => {
+    setAuthError(false);
+    onReject();
+  };
 
   return (
     <>
@@ -20,15 +25,11 @@ export default function ProtectedLayout({ token, onReject }) {
       )}
 
       {authError && (
-        <Modal
+        <AlertModal
           isOpen={authError}
-          onClose={() => {
-            onReject();
-            setAuthError(false);
-          }}
-        >
-          <p>Your log session has expired. Please logged in.</p>
-        </Modal>
+          onClose={handleOnClose}
+          message='Your login session has expired. Please log in again.'
+        />
       )}
     </>
   );
