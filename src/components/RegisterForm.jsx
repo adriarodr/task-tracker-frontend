@@ -66,6 +66,7 @@ export default function RegisterForm() {
   return (
     <>
       <h2>Welcome</h2>
+      <p>Create an account to start managing your tasks</p>
 
       {message && <Message type={message.type} text={message.text} />}
 
