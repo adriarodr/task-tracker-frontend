@@ -64,6 +64,7 @@ export default function LoginForm({ onSuccess }) {
   return (
     <>
       <h2>Welcome Back</h2>
+      <p>Log in to continue managing your tasks</p>
 
       {message && <Message type={message.type} text={message.text} />}
 
