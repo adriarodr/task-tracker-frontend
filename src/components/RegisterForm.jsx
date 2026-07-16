@@ -43,6 +43,11 @@ export default function RegisterForm() {
           type: 'success',
           text: 'Signup successful. You can now log in.',
         });
+        setUser({
+          name: '',
+          email: '',
+          password: '',
+        });
       } else {
         const result = await response.json();
 
@@ -58,11 +63,6 @@ export default function RegisterForm() {
       });
     } finally {
       setPending(false);
-      setUser({
-        name: '',
-        email: '',
-        password: '',
-      });
     }
   };
 

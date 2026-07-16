@@ -41,6 +41,10 @@ export default function LoginForm({ onSuccess }) {
 
       if (response.ok) {
         onSuccess(result.token);
+        setUser({
+          email: '',
+          password: '',
+        });
       } else {
         setMessage({
           type: 'error',
@@ -54,11 +58,6 @@ export default function LoginForm({ onSuccess }) {
       });
     } finally {
       setPending(false);
-      setUser({
-        name: '',
-        email: '',
-        password: '',
-      });
     }
   };
 
