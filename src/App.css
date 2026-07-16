@@ -145,6 +145,11 @@ h3 {
   pointer-events: none;
 }
 
+.loading {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-semi-bold);
+}
+
 /* CSS for the Header Section */
 header {
   display: flex;
@@ -180,6 +185,11 @@ main {
     justify-content: center;
     align-items: center;
     gap: 1.65rem;
+
+    & h2 {
+      width: 100%;
+      text-align: center;
+    }
   }
 }
 
