@@ -11,7 +11,7 @@ export default function LoginForm({ onSuccess }) {
   });
 
   const [pending, setPending] = useState(false);
-  const [message, setMessage] = useState({ type: '', text: '' });
+  const [message, setMessage] = useState(null);
 
   const handleChange = (e) => {
     setUser({

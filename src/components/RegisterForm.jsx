@@ -12,7 +12,7 @@ export default function RegisterForm() {
   });
 
   const [pending, setPending] = useState(false);
-  const [message, setMessage] = useState({ type: '', text: '' });
+  const [message, setMessage] = useState(null);
 
   const handleChange = (e) => {
     setUser({
