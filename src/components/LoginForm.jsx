@@ -63,36 +63,36 @@ export default function LoginForm({ onSuccess }) {
   };
 
   return (
-    <div>
+    <div className='form-container'>
       <h2>Welcome Back</h2>
 
       {message && <Message type={message.type} text={message.text} />}
 
       <form onSubmit={handleSubmit}>
         <label htmlFor='email'>
-          Email Address{' '}
-          <input
-            type='text'
-            name='email'
-            id='email'
-            value={user.email}
-            onChange={handleChange}
-            placeholder='example@email.com'
-          />
+          Email Address <span className='required'>*</span>
         </label>
+        <input
+          type='email'
+          name='email'
+          id='email'
+          value={user.email}
+          onChange={handleChange}
+          placeholder='example@email.com'
+        />
 
         <label htmlFor='password'>
-          Password{' '}
-          <input
-            type='password'
-            name='password'
-            id='password'
-            value={user.password}
-            onChange={handleChange}
-          />
+          Password <span className='required'>*</span>
         </label>
+        <input
+          type='password'
+          name='password'
+          id='password'
+          value={user.password}
+          onChange={handleChange}
+        />
 
-        <button type='submit' className='form-btn'>
+        <button type='submit' className='btn'>
           {pending ? 'Logging in...' : 'Log in'}
         </button>
       </form>

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
+import Header from './components/Header';
+import Footer from './components/Footer';
+
 import ProtectedLayout from './components/layout/ProtectedLayout';
+import PublicLayout from './components/layout/PublicLayout';
 
 const tokenKey = import.meta.env.VITE_TOKEN_KEY;
 
@@ -20,22 +22,15 @@ function App() {
   };
 
   return (
-    <main>
-      {!token && (
-        <div className='container'>
-          <RegisterForm />
-          <LoginForm onSuccess={handleLogin} />
-        </div>
-      )}
+    <>
+      <Header token={token} onLogout={handleReset} />
 
-      {token && (
-        <ProtectedLayout
-          token={token}
-          onLogout={handleReset}
-          onReject={handleReset}
-        />
-      )}
-    </main>
+      {!token && <PublicLayout onLogin={handleLogin} />}
+
+      {token && <ProtectedLayout token={token} onReject={handleReset} />}
+
+      <Footer />
+    </>
   );
 }
 
