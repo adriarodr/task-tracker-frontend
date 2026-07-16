@@ -8,7 +8,11 @@
 
   --c-accent-400: #adb983;
 
-  --c-red: #a90d0d;
+  --c-success: #375a08;
+  --c-success-bg: #efffe5;
+
+  --c-error: #7b1414;
+  --c-error-bg: #ffe3e3;
 
   --padding-sm: 1.65rem 2rem;
 
@@ -106,7 +110,6 @@ main {
   max-width: 460px;
   margin-inline: auto;
   display: grid;
-  gap: 0.75rem;
 
   & h2 {
     text-align: center;
@@ -118,17 +121,27 @@ main {
 }
 
 .message {
+  border-radius: var(--border-radius-sm);
+  padding: 0.65rem;
+  margin-top: 0.55rem;
   font-weight: var(--fw-semi-bold);
   text-align: center;
-  margin-top: 0.55rem;
+}
+
+.message.success {
+  background-color: var(--c-success-bg);
+  border: 2px solid var(--c-success);
+  color: var(--c-success);
 }
 
 .message.error {
-  color: var(--c-red);
+  background-color: var(--c-error-bg);
+  border: 2px solid var(--c-error);
+  color: var(--c-error);
 }
 
 .btn {
-  padding: 0.35rem 0.75rem;
+  padding: 0.45rem 1.85rem;
   border: 1px solid var(--c-neutral-700);
   border-radius: var(--border-radius-sm);
   background-color: var(--c-primary-800);
