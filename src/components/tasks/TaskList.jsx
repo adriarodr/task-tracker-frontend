@@ -2,14 +2,19 @@ import { useState, useEffect } from 'react';
 import { getTasks, addTasks, updateTask, deleteTasks } from '../../utils/api';
 
 import Message from '../ui/Message';
-import Modal from '../ui/Modal';
+import FormModal from '../ui/FormModal';
+
 import TaskCard from './TaskCard';
 import TaskForm from './TaskForm';
 
+import plusIcon from '../../assets/icons/plus-circle.svg';
+
 export default function TaskList({ token, onAuthError }) {
   const [tasks, setTasks] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
   const [isAddModalOpen, setAddModalOpen] = useState(false);
 
   useEffect(() => {
@@ -84,21 +89,21 @@ export default function TaskList({ token, onAuthError }) {
     <section>
       <h2>All Tasks</h2>
 
-      {/* Add a new task */}
-      <div id='update-task'>
-        <button className='btn' onClick={() => setAddModalOpen(true)}>
-          Add Task
-        </button>
-        <Modal
-          isOpen={isAddModalOpen}
-          onClose={() => setAddModalOpen(false)}
-          id='add-task-modal'
-        >
-          <p>Add task</p>
-          <TaskForm onSubmit={handleAddTask} />
-        </Modal>
-      </div>
+      {/* ability to add a new task */}
+      <button className='btn add-tas' onClick={() => setAddModalOpen(true)}>
+        <img src={plusIcon} alt='Plus Icon' className='icon' /> Add Task
+      </button>
 
+      <FormModal
+        isOpen={isAddModalOpen}
+        onCancel={() => setAddModalOpen(false)}
+        className='form-modal'
+      >
+        <p>Add task</p>
+        {isAddModalOpen && <TaskForm onSubmit={handleAddTask} />}
+      </FormModal>
+
+      {/* list of all the tasks */}
       <ul>
         {tasks.map((task) => (
           <li key={task._id}>
