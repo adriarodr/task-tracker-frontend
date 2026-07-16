@@ -12,7 +12,7 @@ export async function getTasks(token) {
 
   if (!response.ok) {
     const error = new Error(result.message);
-    error.statusCode = result.status;
+    error.status = response.status;
 
     throw error;
   }
