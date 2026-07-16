@@ -142,11 +142,15 @@ All images used in this project are CC0-licensed, openly licensed, or my origina
 | Plus Circle | plus-circle.svg | CC0     | [Link to the icon](https://www.svgrepo.com/svg/471792/plus-circle) |
 | Trash Can   | trash.svg       | CC0     | [Link to the icon](https://www.svgrepo.com/svg/472001/trash-03)    |
 | x Circle    | x-circle.svg    | CC0     | [Link to the icon](https://www.svgrepo.com/svg/472092/x-circle)    |
-| Log In      | log-in-out.svg  | CC0     | [Link to the icon](https://www.svgrepo.com/svg/471636/log-in-03)   |
+| Log In      | log-out.svg     | CC0     | [Link to the icon](https://www.svgrepo.com/svg/471636/log-in-03)   |
 | Pencil      | pencil.svg      | CC0     | [Link to the icon](https://www.svgrepo.com/svg/471750/pencil-02)   |
 
 ## Known Issues or Future Improvements
 
 ### Known Issues
 
+No known issues at this time.
+
 ### Future Improvements
+
+- Add a confirmation for when deleting tasks

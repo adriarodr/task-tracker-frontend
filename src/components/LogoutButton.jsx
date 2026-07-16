@@ -1,4 +1,4 @@
-import logoutIcon from '../assets/icons/log-in-out.svg';
+import logoutIcon from '../assets/icons/log-out.svg';
 
 export default function LogoutButton({ onLogout }) {
   return (
