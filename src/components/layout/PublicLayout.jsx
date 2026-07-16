@@ -13,7 +13,7 @@ export default function PublicLayout({ onLogin }) {
   return (
     <main>
       <button onClick={handleToggle} className='btn'>
-        {isRegister ? 'Register' : 'Login'}
+        {isRegister ? 'Login' : 'Register'}
       </button>
 
       {isRegister ? <RegisterForm /> : <LoginForm onSuccess={onLogin} />}
