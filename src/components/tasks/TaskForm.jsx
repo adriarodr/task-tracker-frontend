@@ -45,7 +45,7 @@ export default function TaskForm({ task, onSubmit }) {
   };
 
   return (
-    <div>
+    <>
       <Message type='error' text={error} />
 
       <form onSubmit={handleSubmit}>
@@ -96,6 +96,6 @@ export default function TaskForm({ task, onSubmit }) {
           {task ? 'Update' : 'Add'} Task
         </button>
       </form>
-    </div>
+    </>
   );
 }

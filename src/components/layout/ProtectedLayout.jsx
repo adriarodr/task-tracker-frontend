@@ -18,11 +18,7 @@ export default function ProtectedLayout({ token, onReject }) {
 
   return (
     <main>
-      {!authError && (
-        <div className='container'>
-          <TaskList token={token} onAuthError={handleAuthError} />
-        </div>
-      )}
+      {!authError && <TaskList token={token} onAuthError={handleAuthError} />}
 
       {authError && (
         <AlertModal

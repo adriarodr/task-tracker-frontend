@@ -64,7 +64,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className='form-container'>
+    <>
       <h2>Welcome</h2>
 
       {message && <Message type={message.type} text={message.text} />}
@@ -109,6 +109,6 @@ export default function RegisterForm() {
           {pending ? 'Signing Up...' : 'Sign Up'}
         </button>
       </form>
-    </div>
+    </>
   );
 }

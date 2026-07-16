@@ -11,7 +11,7 @@ export default function PublicLayout({ onLogin }) {
   };
 
   return (
-    <main>
+    <main className='public'>
       <button onClick={handleToggle} className='btn'>
         {isRegister ? 'Login' : 'Register'}
       </button>

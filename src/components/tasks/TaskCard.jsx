@@ -29,32 +29,35 @@ export default function TaskCard({ task, onUpdate, onDelete }) {
 
       {/* task card */}
       <article className='task-card'>
-        <h3>{task.title}</h3>
-        {task.description && <p>{task.description}</p>}
+        <div className='container'>
+          <h3>{task.title}</h3>
+
+          <div className='task-card-btns'>
+            <button
+              className='btn'
+              onClick={() => setEditing(true)}
+              aria-label='Edit Task'
+            >
+              <img src={editIcon} alt='' className='icon' />
+            </button>
+
+            <button
+              className='btn'
+              onClick={() => onDelete(task._id)}
+              aria-label='Delete Task'
+            >
+              <img src={deleteIcon} alt='' className='icon' />
+            </button>
+          </div>
+        </div>
+        <p>{task.isCompleted ? 'Complete' : 'Not Complete'}</p>
         {task.dueDate && (
           <p>
             Due at <span className='bold'>{formatDate(task.dueDate)}</span>
           </p>
         )}
-        <p>{task.isCompleted ? 'Complete' : 'Not Complete'}</p>
 
-        <div className='task-card-btns'>
-          <button
-            className='btn'
-            onClick={() => setEditing(true)}
-            aria-label='Edit Task'
-          >
-            <img src={editIcon} alt='' className='icon' />
-          </button>
-
-          <button
-            className='btn'
-            onClick={() => onDelete(task._id)}
-            aria-label='Delete Task'
-          >
-            <img src={deleteIcon} alt='' className='icon' />
-          </button>
-        </div>
+        {task.description && <p>{task.description}</p>}
 
         {task.updatedAt && <p>Last updated at {formatDate(task.updatedAt)}</p>}
       </article>

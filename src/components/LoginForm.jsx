@@ -62,7 +62,7 @@ export default function LoginForm({ onSuccess }) {
   };
 
   return (
-    <div className='form-container'>
+    <>
       <h2>Welcome Back</h2>
 
       {message && <Message type={message.type} text={message.text} />}
@@ -95,6 +95,6 @@ export default function LoginForm({ onSuccess }) {
           {pending ? 'Logging in...' : 'Log in'}
         </button>
       </form>
-    </div>
+    </>
   );
 }

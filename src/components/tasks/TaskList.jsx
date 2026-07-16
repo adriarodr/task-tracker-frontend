@@ -36,6 +36,8 @@ export default function TaskList({ token, onAuthError }) {
   }, [token, onAuthError]);
 
   const handleAddTask = async (task) => {
+    setError('');
+
     try {
       const response = await addTasks(token, task);
       setAddModalOpen(false);
@@ -47,6 +49,8 @@ export default function TaskList({ token, onAuthError }) {
   };
 
   const handleUpdate = async (id, newTask) => {
+    setError('');
+
     try {
       const response = await updateTask(token, id, newTask);
 
@@ -67,6 +71,8 @@ export default function TaskList({ token, onAuthError }) {
   };
 
   const handleDelete = async (id) => {
+    setError('');
+
     try {
       const response = await deleteTasks(token, id);
       const deletedTask = response.deletedTask;
@@ -78,11 +84,11 @@ export default function TaskList({ token, onAuthError }) {
   };
 
   if (loading) {
-    return <p>Loading tasks...</p>;
+    return <p className='loading'>Loading tasks...</p>;
   }
 
   return (
-    <section id='taskList'>
+    <section id='task-list'>
       <Message type='error' text={error} />
 
       <div className='task-actions'>

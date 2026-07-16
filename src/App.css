@@ -4,8 +4,8 @@
   --c-neutral-200: #f4f6fb;
   --c-neutral-700: #050912;
 
-  --c-primary-600: #405477;
-  --c-primary-800: #49426c;
+  --c-primary-600: #2c2a4a;
+  --c-primary-800: #4f518c;
 
   --c-accent-400: #adb983;
 
@@ -15,12 +15,13 @@
   --c-error: #7b1414;
   --c-error-bg: #ffe3e3;
 
-  /* Paddding */
+  /* Padding */
   --padding-sm: 1.65rem 2rem;
+  --padding-btn: 0.3rem 1.85rem;
 
-  /* typography */
+  /* Typography */
   --ff-headings: 'Montserrat', Arial, Helvetica, sans-serif;
-  --fs-h1: 3.052rem;
+  --fs-h1: 2.75rem;
   --fs-h2: 2.441rem;
   --fs-h3: 1.944rem;
   --fs-caption: 0.8rem;
@@ -53,22 +54,26 @@ img {
   max-width: 100%;
 }
 
+form,
 input,
 button,
-select {
+select,
+textarea {
   font: inherit;
+  font-size: inherit;
+  font-family: inherit;
 }
 
 :where(ul, ol) {
   margin: 0;
-  padding-inline-start: 1.5rem;
+  padding: 0;
 }
 
 .icon {
   display: block;
   max-width: 100%;
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
 }
 
 /* Rest of CSS */
@@ -80,8 +85,10 @@ body {
 }
 
 #root {
-  min-height: 100dvh;
+  display: grid;
   grid-template-rows: auto 1fr auto;
+  grid-template-areas: 'header' 'main' 'footer';
+  min-height: 100dvh;
 }
 
 h1,
@@ -109,24 +116,21 @@ h3 {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem;
-  padding: 0.5rem 1.5rem;
-  border: 1px solid var(--c-neutral-700);
+  padding: var(--padding-btn);
+  border: 1.5px solid var(--c-neutral-700);
   border-radius: var(--border-radius-sm);
   background-color: var(--c-primary-800);
   color: var(--c-neutral-200);
   font-weight: var(--fw-semi-bold);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: capitalize;
   cursor: pointer;
+
   transition:
     border-radius var(--transition-duration) ease-in-out,
     background-color var(--transition-duration) ease-in-out;
-
-  & .icon {
-    width: 35px;
-    height: 35px;
-  }
 }
 
 .btn:hover {
@@ -141,47 +145,41 @@ h3 {
   pointer-events: none;
 }
 
+/* CSS for the Header Section */
 header {
-  grid-area: header;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 1.25rem;
-  background-color: var(--c-primary-600);
+
+  grid-area: header;
   padding: var(--padding-sm);
+  background-color: var(--c-primary-600);
   color: var(--c-neutral-200);
 }
 
 .logout-btn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.75rem;
-  background-color: var(--c-neutral-700);
-  color: var(--c-neutral-200);
-  padding: 1rem 2rem;
+  background-color: var(--c-neutral-200);
+  color: var(--c-neutral-700);
 
-  & .icon {
-    width: 30px;
-    height: 30px;
+  &:hover {
+    background-color: var(--c-neutral-200);
   }
 }
 
+/* CSS for the main section */
 main {
   grid-area: main;
-  padding: 5%;
-}
+  padding: 2% 10%;
 
-.form-container {
-  width: 100%;
-  max-width: 460px;
-  margin-inline: auto;
-  display: grid;
-
-  & h2 {
-    text-align: center;
+  &.public {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.65rem;
   }
 }
 
@@ -189,55 +187,39 @@ main {
   color: var(--c-error);
 }
 
-.message {
-  border-radius: var(--border-radius-sm);
-  padding: 0.65rem;
-  margin-top: 0.55rem;
-  font-weight: var(--fw-semi-bold);
-  text-align: center;
-}
-
-.message.success {
-  background-color: var(--c-success-bg);
-  border: 2px solid var(--c-success);
-  color: var(--c-success);
-}
-
-.message.error {
-  background-color: var(--c-error-bg);
-  border: 2px solid var(--c-error);
-  color: var(--c-error);
-}
-
 form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
-  font-size: 1rem;
+  max-width: 460px;
+
+  & label,
+  & input:not(input[type='checkbox']),
+  & textarea {
+    display: block;
+  }
 
   & label {
     margin-top: 0.95rem;
     text-transform: capitalize;
   }
 
-  & label,
   & input,
   & textarea {
-    display: block;
-  }
-
-  & input,
-  & textarea {
-    display: block;
-    width: 100%;
     padding: 0.35rem 0.75rem;
-    margin-top: 0.45rem;
+    margin-top: 0.25rem;
+    background-color: #fff;
     border-radius: var(--border-radius-sm);
+    border: 2px solid var(--c-primary-800);
+  }
+
+  & input:not(input[type='checkbox']),
+  & textarea {
+    width: 100%;
   }
 
   & textarea {
-    font-weight: inherit;
-    font-size: inherit;
-    font-family: inherit;
-    height: 100%;
     resize: vertical;
     line-height: 1.5;
   }
@@ -245,28 +227,47 @@ form {
   & input[type='checkbox'] {
     display: inline-block;
     accent-color: var(--c-accent-400);
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     margin-left: 1rem;
   }
 
   & .btn {
-    margin-top: 2.25rem;
-    width: 100%;
+    margin-top: 2rem;
   }
 }
 
-dialog[open].modal {
-  display: grid;
-  margin: auto;
-  padding: 1.75rem 3rem;
+.message {
   border-radius: var(--border-radius-sm);
-  border: none;
+  padding: 0.35rem 1.25rem;
   font-weight: var(--fw-semi-bold);
+  text-align: center;
+  border: 2px solid transparent;
 }
 
-dialog[open].form-modal {
-  max-width: 1000px;
+.message.success {
+  background-color: var(--c-success-bg);
+  border-color: var(--c-success);
+  color: var(--c-success);
+}
+
+.message.error {
+  background-color: var(--c-error-bg);
+  border-color: var(--c-error);
+  color: var(--c-error);
+}
+
+dialog[open].modal {
+  margin: auto;
+  padding: var(--padding-sm);
+  border-radius: var(--border-radius-sm);
+  border: none;
+  width: 100%;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
 }
 
 .cancel-btn {
@@ -274,75 +275,67 @@ dialog[open].form-modal {
   background-color: transparent;
   cursor: pointer;
   border: none;
-  justify-self: end;
+  align-self: flex-end;
 }
 
-.task-actions {
+#task-list {
+  display: grid;
+  gap: 1.75rem;
+
+  & .task-actions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  & ul {
+    list-style-type: none;
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  & ul li {
+    padding: 1rem;
+    background-color: #fff;
+    border-left: 6px solid var(--c-primary-800);
+    border-radius: var(--border-radius-sm);
+  }
+}
+
+.container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 1.25rem;
-
-  & .btn {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.75rem;
-    background-color: var(--c-primary-800);
-    color: var(--c-neutral-200);
-    padding: 1rem 2rem;
-
-    & .icon {
-      width: 35px;
-      height: 35px;
-    }
-  }
 }
 
-#taskList ul {
-  list-style-type: none;
+.task-card-btns {
   display: flex;
-  /* flex-direction: row; */
-  /* flex-wrap: wrap; */
-  /* padding-block: 2.5rem; */
-  /* gap: 2rem; */
-  /* padding-inline-start: 0; */
-  /* justify-content: stretch; */
-  align-items: stretch;
-}
-
-.task-card {
-  display: flex;
-  flex-direction: column;
   gap: 1.15rem;
-  background-color: white;
-  padding: 1.25rem 1.55rem;
-  border-radius: var(--border-radius-sm);
-
-  & > :nth-child(1) {
-    border-bottom: 1px solid var(--c-neutral-700);
-    padding-bottom: 0.25rem;
-  }
-
-  & > .task-card-btns {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-    margin-top: 0.25rem;
-  }
 
   & .btn {
     background-color: var(--c-neutral-700);
     color: var(--c-neutral-200);
-    padding: 0.45rem 2.45rem;
+  }
 
-    & .icon {
-      width: 26px;
-      height: 26px;
-    }
+  & .icon {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+.task-card {
+  display: grid;
+  gap: 0.75rem;
+
+  & > :nth-child(1) {
+    border-bottom: 1px solid var(--c-neutral-700);
+    padding-bottom: 0.25rem;
   }
 
   & > :last-child {
@@ -350,10 +343,7 @@ dialog[open].form-modal {
   }
 }
 
-.bold {
-  font-weight: var(--fw-semi-bold);
-}
-
+/* CSS for the footer section */
 footer {
   grid-area: footer;
   background-color: var(--c-neutral-700);
